@@ -16,6 +16,8 @@
 		DA3268A32789036800850FE0 /* Stations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3268A22789036800850FE0 /* Stations.swift */; };
 		DA3268A527890D2900850FE0 /* MapDataPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3268A427890D2900850FE0 /* MapDataPresenter.swift */; };
 		DA3268A7278A2DF500850FE0 /* UserLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3268A6278A2DF500850FE0 /* UserLocationPresenter.swift */; };
+		DAA430FA278C84ED00C42853 /* CellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA430F9278C84ED00C42853 /* CellPresenter.swift */; };
+		DAA430FF278CD84800C42853 /* CustomPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA430FE278CD84800C42853 /* CustomPopup.swift */; };
 		DACC2F13278B06DB0052A525 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACC2F12278B06DB0052A525 /* ListViewController.swift */; };
 		DACC2F15278B22690052A525 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACC2F14278B22690052A525 /* Extention.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +34,8 @@
 		DA3268A22789036800850FE0 /* Stations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stations.swift; sourceTree = "<group>"; };
 		DA3268A427890D2900850FE0 /* MapDataPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataPresenter.swift; sourceTree = "<group>"; };
 		DA3268A6278A2DF500850FE0 /* UserLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationPresenter.swift; sourceTree = "<group>"; };
+		DAA430F9278C84ED00C42853 /* CellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPresenter.swift; sourceTree = "<group>"; };
+		DAA430FE278CD84800C42853 /* CustomPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopup.swift; sourceTree = "<group>"; };
 		DACC2F12278B06DB0052A525 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		DACC2F14278B22690052A525 /* Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,18 +70,15 @@
 		DA32688C2789034E00850FE0 /* StationsApp */ = {
 			isa = PBXGroup;
 			children = (
+				DAA430FC278C8F1600C42853 /* View */,
+				DAA430FB278C8EA900C42853 /* Presenter */,
 				DA3268A12789035A00850FE0 /* Model */,
 				DA32688D2789034E00850FE0 /* AppDelegate.swift */,
-				DA3268A6278A2DF500850FE0 /* UserLocationPresenter.swift */,
 				DA32688F2789034E00850FE0 /* SceneDelegate.swift */,
-				DA3268912789034E00850FE0 /* ViewController.swift */,
 				DA3268932789034E00850FE0 /* Main.storyboard */,
 				DA3268962789034F00850FE0 /* Assets.xcassets */,
 				DA3268982789034F00850FE0 /* LaunchScreen.storyboard */,
 				DA32689B2789034F00850FE0 /* Info.plist */,
-				DA3268A427890D2900850FE0 /* MapDataPresenter.swift */,
-				DACC2F12278B06DB0052A525 /* ListViewController.swift */,
-				DACC2F14278B22690052A525 /* Extention.swift */,
 			);
 			path = StationsApp;
 			sourceTree = "<group>";
@@ -88,6 +89,35 @@
 				DA3268A22789036800850FE0 /* Stations.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DAA430FB278C8EA900C42853 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				DA3268A427890D2900850FE0 /* MapDataPresenter.swift */,
+				DAA430F9278C84ED00C42853 /* CellPresenter.swift */,
+				DA3268A6278A2DF500850FE0 /* UserLocationPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		DAA430FC278C8F1600C42853 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DAA430FD278C8F3600C42853 /* Helper */,
+				DACC2F12278B06DB0052A525 /* ListViewController.swift */,
+				DA3268912789034E00850FE0 /* ViewController.swift */,
+				DAA430FE278CD84800C42853 /* CustomPopup.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DAA430FD278C8F3600C42853 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				DACC2F14278B22690052A525 /* Extention.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAA430FA278C84ED00C42853 /* CellPresenter.swift in Sources */,
 				DACC2F15278B22690052A525 /* Extention.swift in Sources */,
 				DA3268A7278A2DF500850FE0 /* UserLocationPresenter.swift in Sources */,
 				DA3268922789034E00850FE0 /* ViewController.swift in Sources */,
@@ -169,6 +200,7 @@
 				DA3268A527890D2900850FE0 /* MapDataPresenter.swift in Sources */,
 				DA3268902789034E00850FE0 /* SceneDelegate.swift in Sources */,
 				DACC2F13278B06DB0052A525 /* ListViewController.swift in Sources */,
+				DAA430FF278CD84800C42853 /* CustomPopup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

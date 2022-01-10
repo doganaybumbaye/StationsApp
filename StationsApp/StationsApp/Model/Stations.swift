@@ -25,24 +25,7 @@ struct Trips : Decodable{
 
 
 
-//
-//func fetchJsonData(completion: @escaping ([Stations], Error?) -> ()) {
-//    guard let url = URL(string: urlString) else { return }
-//    URLSession.shared.dataTask(with: url) { (data, resp, error) in
-//        
-//        if error != nil {
-//            return
-//        }
-//        
-//        do {
-//            let posts = try JSONDecoder().decode([Stations].self, from: data!)
-//            completion(posts, nil)
-// 
-//        } catch {
-//
-//        }
-//        }.resume()
-//}
+
 
 
 
