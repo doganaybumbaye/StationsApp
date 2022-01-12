@@ -10,7 +10,6 @@ import UIKit
 import CoreLocation
 protocol StationPresenterDelegate : AnyObject{
     func presentStations(stations : [Stations])
-    func presentAlert(title : String , message : String)
     
 }
 
@@ -35,18 +34,9 @@ class StationPresenter {
             }
         }
             task.resume()
-        
-        
-        
-        
+     
     }
-    
-    
-    
 
-    
-    
-    
     
     public func setViewDelegate(delegate : PresenterDelegate ){
         self.delegate = delegate

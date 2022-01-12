@@ -11,54 +11,12 @@ import MapKit
 
 class ListViewController : UIViewController, UITableViewDelegate, CustomCellDelegate{
 
-    
-    func sendBookingRequest() {
-        let url = "https://demo.voltlines.com/case-study/6/stations/\(self.selectedStation!)/trips/\(self.clickedID!)"
-        guard let postUrl = URL(string: url) else { return }
-        var request = URLRequest(url: postUrl)
-        request.httpMethod = "POST"
-        
-        request.httpBody = url.data(using: String.Encoding.utf8)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            if let httpResponse = response as? HTTPURLResponse {
-                
-                if httpResponse.statusCode != 200 {
-                    self.showCustomPopup()
-                }else{
-                    print("successssss")
-                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1){
-                      
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                    
-                }
-            }
-            
-            if let data = data, let dataString = String(data : data, encoding : .utf8){
-                print(dataString)
-               
-            }
-            
-        }
-        task.resume()
-        
-    }
-    
-
-    
     var alltrips : [Trips]!
-    var selectedStation : Int!
-    var clickedID : Int!
+    @Published var selectedStation : Int!
+    @Published var clickedID : Int!
     
     lazy var tripList : UITableView = {
-       let list = UITableView()
-        
-        
+       let list = UITableView()   
         return list
     }()
     
@@ -67,7 +25,6 @@ class ListViewController : UIViewController, UITableViewDelegate, CustomCellDele
         let title = UILabel()
         title.text = "Trips"
         title.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        
         title.textAlignment = .left
         return title
     }()
@@ -82,23 +39,7 @@ class ListViewController : UIViewController, UITableViewDelegate, CustomCellDele
         
         
     }
-    func setUpList(){
-        tripList.delegate = self
-        tripList.dataSource = self
-        
-        tripList.allowsSelection = false
-        view.addSubview(tripList)
-       
-        
-        
-        
-        tripList.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, enableInsets: true)
 
-        tripList.register(CustomCell.self, forCellReuseIdentifier: "cell")
-        view.addSubview(titleTrip)
-
-        titleTrip.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, enableInsets: true)
-    }
 }
 
 
@@ -152,6 +93,71 @@ extension ListViewController {
         }
         
     }
+    
+    func setUpList(){
+        tripList.delegate = self
+        tripList.dataSource = self
+        
+        tripList.allowsSelection = false
+        view.addSubview(tripList)
+       
+        
+        
+        
+        tripList.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, enableInsets: true)
+
+        tripList.register(CustomCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(titleTrip)
+
+        titleTrip.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, enableInsets: true)
+    }
+    
+    func sendBookingRequest(){
+        
+        let url = "https://demo.voltlines.com/case-study/6/stations/\(self.selectedStation!)/trips/\(self.clickedID!)"
+        guard let postUrl = URL(string: url) else { return }
+        var request = URLRequest(url: postUrl)
+        request.httpMethod = "POST"
+        
+        request.httpBody = url.data(using: String.Encoding.utf8)
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                if httpResponse.statusCode != 200 {
+                    self.showCustomPopup()
+                }else{
+                    print("successssss")
+                    
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1){
+                        
+                        self.dismiss(animated: true) {
+//                            change the image to successed in here
+                        }
+                        
+                    }
+
+                }
+            }
+            
+            if let data = data, let dataString = String(data : data, encoding : .utf8){
+                print(dataString)
+                
+            }
+            
+        }
+        task.resume()
+    
+    }
+    
+    func completedStatus() -> Bool {
+        return true
+    }
+
 
 
     

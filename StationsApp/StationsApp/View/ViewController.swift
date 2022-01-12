@@ -9,8 +9,16 @@ import UIKit
 import MapKit
 
 class ViewController: UIViewController, StationPresenterDelegate,CLLocationManagerDelegate {
-    var isSelected = false
-    var pinImage = "Point"
+
+    
+    private let presenter = StationPresenter()
+    private var stations = [Stations]()
+    var selectedAnnotationTrips = [Trips]()
+    var selectedStationID : Int!
+    let locationManager = CLLocationManager()
+    var annotationView : MKAnnotationView!
+    var isTapped = false
+    
     
     lazy var listButton : UIButton = {
         let button = UIButton(type: .system)
@@ -37,16 +45,11 @@ class ViewController: UIViewController, StationPresenterDelegate,CLLocationManag
         return map
     }()
 
-    private let presenter = StationPresenter()
-    private let userPresenter = UserLocation()
-    private var stations = [Stations]()
-    var selectedAnnotationTrips = [Trips]()
-    var selectedStationID : Int!
-    let locationManager = CLLocationManager()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.isCompleted()
         presenter.setViewDelegate(delegate: self)
         presenter.getStations()
         setMapUI()
@@ -84,9 +87,6 @@ class ViewController: UIViewController, StationPresenterDelegate,CLLocationManag
         
     }
     
-    func presentAlert(title: String, message: String) {
-        
-    }
     
     func setMapUI(){
         
@@ -144,13 +144,14 @@ class ViewController: UIViewController, StationPresenterDelegate,CLLocationManag
         let vc = ListViewController()
         vc.alltrips = self.selectedAnnotationTrips
         vc.selectedStation = self.selectedStationID
-        vc.title = "Trips"
+       
         
         self.present(vc, animated: true, completion: nil)
     }
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         listButton.isHidden = false
+        annotationView.image = UIImage(named: "Selected Point")
         stations.forEach {
             if $0.name == view.annotation?.title {
                 selectedAnnotationTrips = $0.trips
@@ -180,15 +181,14 @@ extension ViewController: MKMapViewDelegate{
             return nil
         }
 
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         
         if annotationView == nil {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
-            
             annotationView?.image = UIImage(named: "Point")
-
-
+            
+            
         } else {
             annotationView?.annotation = annotation
             
@@ -198,6 +198,8 @@ extension ViewController: MKMapViewDelegate{
     }
     
     
+
+
 
     
     

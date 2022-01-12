@@ -16,6 +16,8 @@ protocol CustomCellDelegate {
 
 class CustomCell : UITableViewCell {
     var delegate: CustomCellDelegate?
+    
+
     lazy var tripName : UILabel = {
         let nameLabel = UILabel()
         nameLabel.text = "Test"
@@ -50,7 +52,7 @@ class CustomCell : UITableViewCell {
     @objc func buttonTap(){
         delegate?.sendBookingRequest()
         
-       
+        
     }
     
     
